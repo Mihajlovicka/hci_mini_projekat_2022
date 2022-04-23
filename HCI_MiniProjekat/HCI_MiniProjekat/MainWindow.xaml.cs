@@ -24,5 +24,29 @@ namespace HCI_MiniProjekat
         {
             InitializeComponent();
         }
+
+        private void Show_IntervalFrame(object sender, RoutedEventArgs e)
+        {
+            simpleOptionFrame.Content = null;
+            intervalOptionFrame.Content = null;
+            btn_cpi.Background = Brushes.White;
+            btn_inflation.Background = Brushes.White;
+            btn_retail_sales.Background = Brushes.White;
+            Button btn = (Button)sender;
+            btn.Background = Brushes.LightBlue;
+            intervalOptionFrame.Content = new IntervalOptionPage();            
+        }
+
+        private void Show_SimpleFrame(object sender, RoutedEventArgs e)
+        {
+            simpleOptionFrame.Content = null;
+            intervalOptionFrame.Content = null;
+            btn_cpi.Background = Brushes.White;
+            btn_inflation.Background = Brushes.White;
+            btn_retail_sales.Background = Brushes.White;
+            Button btn = (Button)sender;
+            btn.Background = Brushes.LightBlue;
+            simpleOptionFrame.Content = new SimpleOptionPage();
+        }
     }
 }

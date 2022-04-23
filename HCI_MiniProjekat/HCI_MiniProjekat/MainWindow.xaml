@@ -6,7 +6,23 @@
         xmlns:local="clr-namespace:HCI_MiniProjekat"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="40" HorizontalAlignment="Center">Dobrodosli</Label>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
+            <Button Name="btn_cpi" Padding="10" FontSize="20" Margin="20" Click="Show_IntervalFrame" Background="White">Potrosacke cene CPI</Button>
+            <Button Name="btn_inflation" Padding="10" FontSize="20" Margin="20" Click="Show_SimpleFrame" Background="White">Inflacija</Button>
+            <Button Name="btn_retail_sales" Padding="10" FontSize="20" Margin="20" Click="Show_SimpleFrame" Background="White">Zarada maloprodajnih prodavnica</Button>
+        </StackPanel>
+        <Frame x:Name="simpleOptionFrame" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="intervalOptionFrame" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
