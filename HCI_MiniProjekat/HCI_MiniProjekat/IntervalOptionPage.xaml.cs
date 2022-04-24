@@ -25,15 +25,35 @@ namespace HCI_MiniProjekat
             InitializeComponent();
         }
 
-        private void Show_Table(object sender, RoutedEventArgs e)
+        private void Show_TableMonth(object sender, RoutedEventArgs e)
         {
         }
 
-        private void Show_LineGraph(object sender, RoutedEventArgs e)
+        private void Show_LineGraphMonth(object sender, RoutedEventArgs e)
+
+        {
+
+            api.Responce responce = api.CPI.get("month");
+            LineGraph lineGraph = new LineGraph(responce);
+            lineGraph.Show();
+        }
+
+        private void Show_PieChartMonth(object sender, RoutedEventArgs e)
         {
         }
 
-        private void Show_PieChart(object sender, RoutedEventArgs e)
+        private void Show_TableSemiannual(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void Show_LineGraphSemiannual(object sender, RoutedEventArgs e)
+        {
+            api.Responce responce = api.CPI.get("semiannual");
+            LineGraph lineGraph = new LineGraph(responce);
+            lineGraph.Show();
+        }
+
+        private void Show_PieChartSemiannual(object sender, RoutedEventArgs e)
         {
         }
     }

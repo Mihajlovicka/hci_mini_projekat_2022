@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace HCI_MiniProjekat
     /// </summary>
     public partial class MainWindow : Window
     {
+       
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,6 +37,8 @@ namespace HCI_MiniProjekat
             btn_retail_sales.Background = Brushes.White;
             Button btn = (Button)sender;
             btn.Background = Brushes.LightBlue;
+
+            
             intervalOptionFrame.Content = new IntervalOptionPage();            
         }
 
@@ -46,7 +51,18 @@ namespace HCI_MiniProjekat
             btn_retail_sales.Background = Brushes.White;
             Button btn = (Button)sender;
             btn.Background = Brushes.LightBlue;
-            simpleOptionFrame.Content = new SimpleOptionPage();
+
+            api.Responce responce = null;
+            if(btn.Name == "btn_inflation")
+            {
+                responce = api.Inflation.get();
+            }
+            if (btn.Name == "btn_retail_sales")
+            {
+                responce = api.RetailSales.get();
+            }
+            
+            simpleOptionFrame.Content = new SimpleOptionPage(responce);
         }
     }
 }

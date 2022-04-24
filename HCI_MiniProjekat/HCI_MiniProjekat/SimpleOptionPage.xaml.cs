@@ -20,17 +20,24 @@ namespace HCI_MiniProjekat
     /// </summary>
     public partial class SimpleOptionPage : Page
     {
-        public SimpleOptionPage()
+        private api.Responce responce;
+
+        public SimpleOptionPage(api.Responce r)
         {
             InitializeComponent();
+            responce = r;
         }
 
         private void Show_Table(object sender, RoutedEventArgs e)
         {
+           
         }
 
         private void Show_LineGraph(object sender, RoutedEventArgs e)
         {
+            
+            LineGraph lineGraph = new LineGraph(responce);
+            lineGraph.Show();
         }
 
         private void Show_PieChart(object sender, RoutedEventArgs e)

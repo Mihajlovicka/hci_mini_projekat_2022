@@ -20,17 +20,17 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" VerticalAlignment="Center" >
             <Label  FontSize="22" Margin="5" HorizontalAlignment="Center">Mesecni prikaz</Label>
 
-            <Button Name="btn_table_month" FontSize="20" Margin="5" Click="Show_Table" Background="White">Tabela</Button>
-            <Button Name="btn_linegraph_month" FontSize="20" Margin="5" Click="Show_LineGraph" Background="White">Linijski grafikon</Button>
-            <Button Name="btn_piechart_month" FontSize="20" Margin="5" Click="Show_PieChart" Background="White">Kruzni grafikon</Button>
+            <Button Name="btn_table_month" FontSize="20" Margin="5" Click="Show_TableMonth" Background="White">Tabela</Button>
+            <Button Name="btn_linegraph_month" FontSize="20" Margin="5" Click="Show_LineGraphMonth" Background="White">Linijski grafikon</Button>
+            <Button Name="btn_piechart_month" FontSize="20" Margin="5" Click="Show_PieChartMonth" Background="White">Kruzni grafikon</Button>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.Row="1" VerticalAlignment="Center">
             <Label  FontSize="22" Margin="5" HorizontalAlignment="Center">Polu godisnji prikaz</Label>
 
-            <Button Name="btn_tabl_semiannual" FontSize="20" Margin="5" Click="Show_Table" Background="White">Tabela</Button>
-            <Button Name="btn_linegraph_semiannual" FontSize="20" Margin="5" Click="Show_LineGraph" Background="White">Linijski grafikon</Button>
-            <Button Name="btn_piechart_semiannual" FontSize="20" Margin="5" Click="Show_PieChart" Background="White">Kruzni grafikon</Button>
+            <Button Name="btn_tabl_semiannual" FontSize="20" Margin="5" Click="Show_TableSemiannual" Background="White">Tabela</Button>
+            <Button Name="btn_linegraph_semiannual" FontSize="20" Margin="5" Click="Show_LineGraphSemiannual" Background="White">Linijski grafikon</Button>
+            <Button Name="btn_piechart_semiannual" FontSize="20" Margin="5" Click="Show_PieChartSemiannual" Background="White">Kruzni grafikon</Button>
         </StackPanel>
     </Grid>
 </Page>
