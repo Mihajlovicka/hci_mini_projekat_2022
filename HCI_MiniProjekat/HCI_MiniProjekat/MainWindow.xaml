@@ -4,25 +4,73 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HCI_MiniProjekat"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Money" Height="450" Width="800">
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="40" HorizontalAlignment="Center">Dobrodosli</Label>
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">
-            <Button Name="btn_cpi" Padding="10" FontSize="20" Margin="20" Click="Show_IntervalFrame" Background="White">Potrosacke cene CPI</Button>
-            <Button Name="btn_inflation" Padding="10" FontSize="20" Margin="20" Click="Show_SimpleFrame" Background="White">Inflacija</Button>
-            <Button Name="btn_retail_sales" Padding="10" FontSize="20" Margin="20" Click="Show_SimpleFrame" Background="White">Zarada maloprodajnih prodavnica</Button>
-        </StackPanel>
-        <Frame x:Name="simpleOptionFrame" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden"/>
-        <Frame x:Name="intervalOptionFrame" Grid.Row="1" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+
+        <ComboBox x:Name="typeCmb" SelectionChanged="typeCmb_SelectionChanged" Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="DimGray" >
+            <ComboBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightCyan" />
+            </ComboBox.Resources>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    
+                    <Setter Property="Background" Value="White"></Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+            <ComboBoxItem Content="Tip prikaza" IsSelected="True" IsEnabled="False"/>
+            <ComboBoxItem Name="CPI_cmb" Content="Potrosacke cene" />
+            <ComboBoxItem Name="inflation_cmb" Content="Inflacija" />
+            <ComboBoxItem Name="retailsales_cmb" Content="Zarada maloprodajnih prodavnica" />
+        </ComboBox>
+        <ComboBox x:Name="interval_cmb" SelectionChanged="interval_cmb_SelectionChanged" Visibility="Hidden"  Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="DimGray" >
+            <ComboBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightCyan" />
+            </ComboBox.Resources>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+            <ComboBoxItem Name="time_interval_cmb" Content="Vremenski interval" IsSelected="True" IsEnabled="False"/>
+            <ComboBoxItem Name="month_cmb" Content="Mesecni" />
+            <ComboBoxItem Name="semiannual_cmb" Content="Pola godine" />
+        </ComboBox>
+        <ComboBox x:Name="graph_cmb" SelectionChanged="graph_cmb_SelectionChanged"  Style="{StaticResource {x:Static ToolBar.ComboBoxStyleKey}}" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="DimGray" >
+            <ComboBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightCyan" />
+            </ComboBox.Resources>
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+            <ComboBoxItem Name="line_graph_cmb" Content="Linijski grafik" IsSelected="True" />
+            <ComboBoxItem Name="column_cmb" Content="Stubicasti grafik" />
+        </ComboBox>
+        <Button Grid.Column="3" Name="btn_ShowTable" Click="btn_ShowTable_Click"  Content="Otvori tabelarni prikaz" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCyan" Foreground="DimGray" FontSize="15"/>
+        <Label Name="chart_title" Grid.Row="1" Grid.ColumnSpan="4" FontSize="15" HorizontalAlignment="Center" Foreground="DimGray"></Label>
+        <lvc:CartesianChart  Name="line_chart" Visibility="Hidden"  LegendLocation="Right" Grid.Row="2" Grid.ColumnSpan="4">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Date" Name="XLine"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Name="LineYAxis"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+
     </Grid>
 </Window>
