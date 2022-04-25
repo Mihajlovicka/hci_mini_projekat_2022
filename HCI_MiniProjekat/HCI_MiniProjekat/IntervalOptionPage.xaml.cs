@@ -27,6 +27,8 @@ namespace HCI_MiniProjekat
 
         private void Show_TableMonth(object sender, RoutedEventArgs e)
         {
+            Table table = new Table(api.CPI.get("month"));
+            table.Show();
         }
 
         private void Show_LineGraphMonth(object sender, RoutedEventArgs e)
@@ -44,6 +46,8 @@ namespace HCI_MiniProjekat
 
         private void Show_TableSemiannual(object sender, RoutedEventArgs e)
         {
+            Table table = new Table(api.CPI.get("semiannual"));
+            table.Show();
         }
 
         private void Show_LineGraphSemiannual(object sender, RoutedEventArgs e)

@@ -30,7 +30,8 @@ namespace HCI_MiniProjekat
 
         private void Show_Table(object sender, RoutedEventArgs e)
         {
-           
+            Table table = new Table(responce);
+            table.Show();
         }
 
         private void Show_LineGraph(object sender, RoutedEventArgs e)
