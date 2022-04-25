@@ -67,7 +67,7 @@ namespace HCI_MiniProjekat
             else
             {
                 start = 0;
-                MessageBox.Show("Stigli ste do kraja prikaza podataka.");
+                MessageBox.Show("Nalazite se na pocetku prikaza podataka.", "Paznja", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             loadChart();
         }
@@ -82,7 +82,7 @@ namespace HCI_MiniProjekat
             else
             {
                 start = responce.data.Count - 1 - cnt;
-                MessageBox.Show("Stigli ste do kraja prikaza podataka.");
+                MessageBox.Show("Nalazite se na kraju prikaza podataka.", "Paznja", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
 
@@ -91,8 +91,27 @@ namespace HCI_MiniProjekat
 
         private void cntTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            cnt = Convert.ToInt32(cntTextBox.Text);
-            loadChart();
+            try
+            {
+                int pom = Convert.ToInt32(cntTextBox.Text);
+                if (pom > 150 || pom <= 0)
+                {
+                    MessageBox.Show("Vrednost mora biti u opsegu 1 - 150!", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+                    cntTextBox.Text = cnt.ToString();
+                    cntTextBox.Focus();
+                }
+                else
+                {
+                    cnt = pom;
+                    loadChart();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Pogresan unos. Uneta vrednost mora biti broj!", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
+                cntTextBox.Text = cnt.ToString();
+                cntTextBox.Focus();
+            }
         }
     }
 }

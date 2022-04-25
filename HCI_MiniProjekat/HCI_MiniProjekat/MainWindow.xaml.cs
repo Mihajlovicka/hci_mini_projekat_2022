@@ -157,9 +157,13 @@ namespace HCI_MiniProjekat
                 table = new Table(responce,this);
                 table.Show();
             }
+            else if (table != null)
+            {
+                MessageBox.Show("Tabela vec otvorena.","Greska",MessageBoxButton.OK,MessageBoxImage.Error);
+            }
             else
             {
-                MessageBox.Show("Odaberite zeljeni prikaz.");
+                MessageBox.Show("Odaberite zeljeni prikaz.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             
