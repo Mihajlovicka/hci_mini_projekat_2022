@@ -50,7 +50,7 @@ namespace HCI_MiniProjekat
             {
                 new ColumnSeries
                 {
-                    Title = "nesto",
+                    
                     Values = values
                 }
             };

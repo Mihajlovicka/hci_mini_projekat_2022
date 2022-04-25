@@ -58,11 +58,13 @@
                     <Setter Property="Background" Value="White"></Setter>
                 </Style>
             </ComboBox.ItemContainerStyle>
-            <ComboBoxItem Name="line_graph_cmb" Content="Linijski grafik" IsSelected="True" />
+            <ComboBoxItem Content="Tip grafikona" IsSelected="True" IsEnabled="False"/>
+            <ComboBoxItem Name="line_graph_cmb" Content="Linijski grafik"/>
             <ComboBoxItem Name="column_cmb" Content="Stubicasti grafik" />
         </ComboBox>
         <Button Grid.Column="3" Name="btn_ShowTable" Click="btn_ShowTable_Click"  Content="Otvori tabelarni prikaz" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightCyan" Foreground="DimGray" FontSize="15"/>
         <Label Name="chart_title" Grid.Row="1" Grid.ColumnSpan="4" FontSize="15" HorizontalAlignment="Center" Foreground="DimGray"></Label>
+        <Grid x:Name="GrafikGridicNepotrebniAliPotrebni" Visibility="Hidden" Grid.Row="2" Grid.ColumnSpan="4"></Grid>
         <lvc:CartesianChart  Name="line_chart" Visibility="Hidden"  LegendLocation="Right" Grid.Row="2" Grid.ColumnSpan="4">
             <lvc:CartesianChart.AxisX>
                 <lvc:Axis Title="Date" Name="XLine"></lvc:Axis>
@@ -71,6 +73,6 @@
                 <lvc:Axis Name="LineYAxis"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
-
+        
     </Grid>
 </Window>

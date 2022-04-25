@@ -22,6 +22,7 @@ namespace HCI_MiniProjekat
     /// </summary>
     public partial class MainWindow : Window
     {
+        ColumnChart columnChart;
 
         public SeriesCollection SeriesCollection { get; set; }
         public List<string> dates { get; set; }
@@ -34,44 +35,94 @@ namespace HCI_MiniProjekat
 
         private void typeCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SeriesCollection = null;
-            dates = null;
-            responce = null;
-            if(line_chart != null)
-                line_chart.Visibility = Visibility.Hidden;
-            if (table != null)
+            if (typeCmb.SelectedIndex != 0)
             {
-                table.Close();
-            }
-            if(interval_cmb != null)
-            if(interval_cmb.Visibility == Visibility.Visible)
-            {
-                interval_cmb.Visibility = Visibility.Hidden;
-            }
-            if (CPI_cmb == typeCmb.SelectedItem)
-            {
-                interval_cmb.Visibility = Visibility.Visible;
-                
-                    
-            }
-            if (inflation_cmb == typeCmb.SelectedItem)
-            {
-                responce = api.Inflation.get();
-                if (line_graph_cmb == graph_cmb.SelectedItem)
+                graph_cmb.SelectedIndex = 0;
+
+                SeriesCollection = null;
+                dates = null;
+                responce = null;
+                if (line_chart != null)
+                    line_chart.Visibility = Visibility.Hidden;
+                if (GrafikGridicNepotrebniAliPotrebni != null)
+                    GrafikGridicNepotrebniAliPotrebni.Visibility = Visibility.Hidden;
+                if (table != null)
                 {
-                    LineChart lineChart = new LineChart(responce, this);
-                    DataContext = this;
-                    chart_title.Content = responce.name;
-                    LineYAxis.Title = responce.unit;                    
-                    line_chart.Series = SeriesCollection;
-                    XLine.Labels = dates;
-                    line_chart.Visibility = Visibility.Visible;
+                    table.Close();
+                    table = null;
                 }
-                
+                if (interval_cmb != null)
+                    if (interval_cmb.Visibility == Visibility.Visible)
+                    {
+                        interval_cmb.Visibility = Visibility.Hidden;
+
+                    }
+                if (CPI_cmb == typeCmb.SelectedItem)
+                {
+
+                    interval_cmb.Visibility = Visibility.Visible;
+                    interval_cmb.SelectedIndex = 0;
+                    graph_cmb.IsEnabled = false;
+                    chart_title.Content = "";
+
+                }
+                else
+                {
+                    if (inflation_cmb == typeCmb.SelectedItem)
+                    {
+                        responce = api.Inflation.get();
+
+
+                    }
+                    if (retailsales_cmb == typeCmb.SelectedItem)
+                    {
+                        responce = api.RetailSales.get();
+
+                    }
+
+                    graph_cmb.SelectedIndex = 1;
+                }
+
             }
-            if (retailsales_cmb == typeCmb.SelectedItem)
+        }
+        private void interval_cmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (interval_cmb.SelectedIndex != 0)
             {
-                responce = api.RetailSales.get();
+                graph_cmb.IsEnabled = true;
+
+                graph_cmb.SelectedIndex = 0;
+                SeriesCollection = null;
+                dates = null;
+                responce = null;
+                if (line_chart != null)
+                    line_chart.Visibility = Visibility.Hidden;
+                if (GrafikGridicNepotrebniAliPotrebni != null)
+                    GrafikGridicNepotrebniAliPotrebni.Visibility = Visibility.Hidden;
+                if (month_cmb == interval_cmb.SelectedItem)
+                {
+                    responce = api.CPI.get("month");
+
+                }
+                if (semiannual_cmb == interval_cmb.SelectedItem)
+                {
+                    responce = api.CPI.get("semiannual");
+
+                }
+                if(table != null) table.changeSource(responce);
+                graph_cmb.SelectedIndex=1;
+            }
+
+        }
+
+        private void graph_cmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (graph_cmb.SelectedIndex != 0)
+            {
+                if (line_chart != null)
+                    line_chart.Visibility = Visibility.Hidden;
+                if (GrafikGridicNepotrebniAliPotrebni != null)
+                    GrafikGridicNepotrebniAliPotrebni.Visibility = Visibility.Hidden;
                 if (line_graph_cmb == graph_cmb.SelectedItem)
                 {
                     LineChart lineChart = new LineChart(responce, this);
@@ -81,61 +132,42 @@ namespace HCI_MiniProjekat
                     line_chart.Series = SeriesCollection;
                     XLine.Labels = dates;
                     line_chart.Visibility = Visibility.Visible;
+                    GrafikGridicNepotrebniAliPotrebni.Visibility = Visibility.Hidden;
+                }
+                if (column_cmb == graph_cmb.SelectedItem)
+                {
+                    //ucitaj
+                    line_chart.Visibility = Visibility.Hidden;
+                    columnChart = new ColumnChart(responce);
+                    GrafikGridicNepotrebniAliPotrebni.Children.Clear();
+                    GrafikGridicNepotrebniAliPotrebni.Children.Add(columnChart);
+
+                    GrafikGridicNepotrebniAliPotrebni.Visibility = Visibility.Visible;
+                    
+                        
+
                 }
             }
-
-            
-            
-        }
-
-        private void interval_cmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            SeriesCollection = null;
-            dates = null;
-            responce = null;
-            if (line_chart != null)
-                line_chart.Visibility = Visibility.Hidden;
-            if (month_cmb == interval_cmb.SelectedItem)
-            {
-                responce = api.CPI.get("month");
-                LineChart lineChart = new LineChart(responce, this);
-                DataContext = this;
-                chart_title.Content = responce.name;
-                LineYAxis.Title = responce.unit;
-                line_chart.Series = SeriesCollection;
-                XLine.Labels = dates;
-                line_chart.Visibility = Visibility.Visible;
-            }
-            if (semiannual_cmb == interval_cmb.SelectedItem)
-            {
-                responce = api.CPI.get("semiannual");
-                LineChart lineChart = new LineChart(responce, this);
-                DataContext = this;
-                chart_title.Content = responce.name;
-                LineYAxis.Title = responce.unit;
-                line_chart.Series = SeriesCollection;
-                XLine.Labels = dates;
-                line_chart.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void graph_cmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void btn_ShowTable_Click(object sender, RoutedEventArgs e)
         {
-            if (responce != null) { 
-                table = new Table(responce);
+            
+            if (responce != null && table==null) { 
+                table = new Table(responce,this);
                 table.Show();
             }
             else
             {
                 MessageBox.Show("Odaberite zeljeni prikaz.");
             }
+
             
+        }
+
+        public void setTableToNull()
+        {
+            table = null;
         }
        
     }

@@ -19,20 +19,26 @@ namespace HCI_MiniProjekat
     /// </summary>
     public partial class Table : Window
     {
-
-        public Table(api.Responce r)
+        MainWindow parent;
+        public Table(api.Responce r, MainWindow w)
         {
             InitializeComponent();
-
+            changeSource(r);
+            parent = w; 
             
+
+
+        }
+        public void changeSource(api.Responce r) {
             grid.ItemsSource = r.data;
             grid.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
 
             DataContext = this;
-
-
         }
 
-       
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            parent.setTableToNull();
+        }
     }
 }
